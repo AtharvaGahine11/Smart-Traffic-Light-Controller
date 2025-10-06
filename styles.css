@@ -1,0 +1,247 @@
+/* styles.css */
+
+:root{
+  --bg:#0b0f1f;
+  --panel:#1e293b;
+  --pill-bg:rgba(255,255,255,0.05);
+  --red:#ef4444;
+  --yellow:#facc15;
+  --green:#10b981;
+  --muted:#9ca3af;
+  --road:#2c3e50;
+  --car-gradient-start:#60a5fa;
+  --car-gradient-end:#3b82f6;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Inter,sans-serif;background:var(--bg);color:#f1f5f9;padding:16px;}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  margin-bottom:16px;
+}
+.topbar h1{
+  font-size:50px;
+  text-shadow: 0 0 6px rgba(0,0,0,0.6);
+}
+.mode-pill{
+  padding:6px 14px;
+  border-radius:999px;
+  background:var(--pill-bg);
+  font-weight:500;
+  letter-spacing:0.5px;
+}
+.emergency-badge{
+  padding:6px 14px;
+  border-radius:12px;
+  background:var(--red);
+  color:#fff;
+  font-weight:700;
+  text-shadow:0 0 4px #210000;
+}
+.hidden{display:none;}
+
+.main-grid{
+  display:grid;
+  grid-template-columns:360px 1fr;
+  gap:18px;
+}
+
+.panel{
+  background:var(--panel);
+  border-radius:16px;
+  padding:20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  backdrop-filter: blur(6px);
+}
+
+.btn{
+  background:var(--pill-bg);
+  border:none;
+  padding:10px 16px;
+  border-radius:12px;
+  color:inherit;
+  cursor:pointer;
+  margin:4px;
+  transition: all 0.2s;
+}
+.btn:hover{
+  background:rgba(255,255,255,0.1);
+  transform:translateY(-2px);
+}
+.btn.emergency{
+  background:var(--red);
+  color:#fff;
+  font-weight:700;
+  text-shadow:0 0 3px #210000;
+}
+/* Active button style for visual feedback */
+.btn.active {
+    outline: 2px solid var(--green);
+    background: rgba(16, 185, 129, 0.2);
+}
+
+.card{
+  background:rgba(255,255,255,0.03);
+  border-radius:16px;
+  padding:16px;
+  margin-top:16px;
+  box-shadow:0 6px 15px rgba(0,0,0,0.3);
+}
+
+label{
+  display:block;
+  margin:10px 0;
+  color:var(--muted);
+}
+input{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  background:rgba(255,255,255,0.02);
+  color:#f1f5f9;
+  outline:none;
+}
+
+.traffic{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.intersection{
+  position:relative;
+  width:100%;
+  min-height:450px;
+  background:var(--road);
+  border-radius:20px;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+}
+
+/* Roads */
+.road{
+  position:absolute;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+}
+.road.north, .road.south{
+  width:80px;
+  flex-direction:column;
+}
+.road.east, .road.west{
+  height:80px;
+  flex-direction:row;
+}
+
+.road.north{top:8px; left:50%; transform:translateX(-50%);}
+.road.south{bottom:8px; left:50%; transform:translateX(-50%);}
+.road.east{right:8px; top:50%; transform:translateY(-50%);}
+.road.west{left:8px; top:50%; transform:translateY(-50%); flex-direction:row-reverse;}
+
+/* Signals */
+.signal{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  padding:8px;
+  border-radius:12px;
+  background:rgba(0,0,0,0.25);
+  box-shadow:0 0 10px rgba(0,0,0,0.7);
+}
+.signal .light{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.06);
+  transition: all 0.3s;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.7);
+}
+
+/* --- CORRECTED LIGHT SELECTORS --- */
+.signal .light.red {
+  background:var(--red);
+  box-shadow: 0 0 12px var(--red), 0 0 25px rgba(239,68,68,0.6);
+}
+.signal .light.yellow {
+  background:var(--yellow);
+  box-shadow: 0 0 12px var(--yellow), 0 0 25px rgba(250,204,21,0.6);
+}
+.signal .light.green {
+  background:var(--green);
+  box-shadow: 0 0 12px var(--green), 0 0 25px rgba(16,185,129,0.6);
+}
+/* --------------------------------- */
+
+.label{
+  color:var(--muted);
+  font-size:0.9rem;
+  margin-top:4px;
+  text-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+
+/* Cars */
+.car-stack{
+  position:relative;
+  display:flex;
+  gap:6px;
+  align-items:center;
+  overflow:hidden;
+  height:22px;
+  /* Initial state: make the cars visually distinct */
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+/* Add a visual effect when the road is open */
+.car-stack.active {
+    text-shadow: 0 0 10px var(--green); /* Add a 'moving' glow */
+}
+
+/* Pedestrians */
+.pedestrian{
+  position:absolute;
+  font-size:20px;
+  opacity:0;
+  transition:opacity 0.5s, transform 0.5s;
+  text-shadow:0 0 4px #000;
+  /* Positioning relative to the intersection center */
+  transform: scaleX(-1); /* Face the intersection */
+}
+/* Pedestrian animation on green light (not fully implemented in JS but set up here) */
+.pedestrian.active{
+  opacity:1;
+  /* No visible change on the intersection view yet */
+}
+
+/* Activity Log styles (for better readability) */
+.log-card {
+    max-height: 250px;
+    overflow-y: auto;
+}
+#logArea p {
+    font-size: 0.8rem;
+    padding: 2px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+#logArea p:last-child {
+    border-bottom: none;
+}
+#logArea span {
+    color: var(--yellow);
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+/* Footer */
+.footer{
+  text-align:center;
+  margin-top:20px;
+  font-size:0.8rem; /* Adjusted for standard footer size */
+  color:var(--muted);
+}

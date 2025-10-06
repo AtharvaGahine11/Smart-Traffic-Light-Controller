@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login - Traffic Controller</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        /* Add specific styles for the login form */
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            background: var(--panel);
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #f1f5f9;
+        }
+        .login-container label {
+            text-align: left;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+        .login-container input {
+            background: rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .login-container .btn {
+            width: 100%;
+            margin-top: 20px;
+            background: var(--green);
+            color: #fff;
+            font-weight: bold;
+        }
+        .login-container .btn:hover {
+            background: var(--green);
+            opacity: 0.9;
+            transform: none;
+        }
+        #loginError {
+            color: var(--red);
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>🚦 Admin Login</h2>
+        <form id="loginForm">
+            <label for="email">Email</label>
+            <input type="email" id="email" required placeholder="admin@example.com" />
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" required placeholder="********" />
+            
+            <button type="submit" class="btn">Login</button>
+            <p id="loginError"></p>
+        </form>
+    </div>
+
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="login.js"></script>
+
+</body>
+</html>

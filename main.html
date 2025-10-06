@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Traffic Light Controller</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header class="topbar">
+        <h1>🚦 Smart Traffic Light Controller</h1>
+        <div class="mode-indicator">
+            Mode: <span id="activeMode" class="mode-pill">AUTO</span>
+            <span id="emergencyBadge" class="emergency-badge hidden">EMERGENCY ACTIVE</span>
+        </div>
+        <button class="btn" id="logoutBtn">Logout</button>
+    </header>
+    <div class="app">
+        <!-- <header class="topbar">
+            <h1>🚦 Smart Traffic Light Controller</h1>
+            <div class="mode-indicator">
+                Mode: <span id="activeMode" class="mode-pill">AUTO</span>
+                <span id="emergencyBadge" class="emergency-badge hidden">EMERGENCY ACTIVE</span>
+            </div>
+        </header> -->
+
+        <main class="main-grid">
+            <section class="panel controls">
+                <h2>Controls & Settings</h2>
+
+                <div class="modes">
+                    <button class="btn mode-btn" id="autoBtn" data-mode="AUTO">AUTO</button>
+                    <button class="btn mode-btn" id="manualBtn" data-mode="MANUAL">MANUAL</button>
+                    <button class="btn mode-btn emergency" id="emergencyBtn" data-mode="EMERGENCY">EMERGENCY</button>
+                </div>
+
+                <div class="auto-settings card">
+                    <h3>AUTO Mode Settings</h3>
+                    <label>
+                        North-South green (seconds)
+                        <input id="nsDuration" type="number" min="5" value="20" />
+                    </label>
+                    <label>
+                        East-West green (seconds)
+                        <input id="ewDuration" type="number" min="5" value="15" />
+                    </label>
+                    <label>
+                        North-South vehicle count
+                        <input id="nsCount" type="number" min="0" value="10" />
+                    </label>
+                    <label>
+                        East-West vehicle count
+                        <input id="ewCount" type="number" min="0" value="8" />
+                    </label>
+                </div>
+
+                <div class="manual-controls card">
+                    <h3>MANUAL Controls</h3>
+                    <button id="manualNS" class="btn manual-btn" data-dir="NS">North-South GREEN</button>
+                    <button id="manualEW" class="btn manual-btn" data-dir="EW">East-West GREEN</button>
+                </div>
+
+                <div class="status-card card">
+                    <h3>Live Status</h3>
+                    <p><strong>Active Phase:</strong> <span id="activePhaseDisplay">-</span></p>
+                    <p><strong>Timer:</strong> <span id="timer">00</span> s</p>
+                    <p><strong>Next Green:</strong> <span id="nextDirection">-</span></p>
+                    <p><strong>Pedestrian Signal:</strong> <span id="pedSignal">-</span></p>
+                </div>
+
+                <div class="status-card card log-card">
+                    <h3>Activity Log</h3>
+                    <div id="logArea"></div>
+                </div>
+            </section>
+
+            <section class="panel traffic">
+                <div class="intersection">
+                    <div class="road north">
+                        <div class="signal" id="signalN" data-dir="N">
+                            <div class="light red"></div>
+                            <div class="light yellow"></div>
+                            <div class="light green"></div>
+                            <div class="label">N</div>
+                        </div>
+                        <div class="car-stack" id="carsN">🚗🚗</div>
+                        <div class="pedestrian" id="pedN">🚶</div>
+                    </div>
+                    <div class="road south">
+                        <div class="signal" id="signalS" data-dir="S">
+                            <div class="light red"></div>
+                            <div class="light yellow"></div>
+                            <div class="light green"></div>
+                            <div class="label">S</div>
+                        </div>
+                        <div class="car-stack" id="carsS">🚗🚗</div>
+                        <div class="pedestrian" id="pedS">🚶</div>
+                    </div>
+                    <div class="road east">
+                        <div class="signal" id="signalE" data-dir="E">
+                            <div class="light red"></div>
+                            <div class="light yellow"></div>
+                            <div class="light green"></div>
+                            <div class="label">E</div>
+                        </div>
+                        <div class="car-stack" id="carsE">🚗🚗</div>
+                        <div class="pedestrian" id="pedE">🚶</div>
+                    </div>
+                    <div class="road west">
+                        <div class="signal" id="signalW" data-dir="W">
+                            <div class="light red"></div>
+                            <div class="light yellow"></div>
+                            <div class="light green"></div>
+                            <div class="label">W</div>
+                        </div>
+                        <div class="car-stack" id="carsW">🚗🚗</div>
+                        <div class="pedestrian" id="pedW">🚶</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <small>Built with ❤️ • "Stop, Look, and Live – Every Signal Saves a Life." 🚦</small>
+        </footer>
+    </div>
+
+    <audio id="modeSound" src="https://freesound.org/data/previews/250/250629_4486188-lq.mp3"></audio>
+
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="script.js"></script>
+
+</body>
+</html>
